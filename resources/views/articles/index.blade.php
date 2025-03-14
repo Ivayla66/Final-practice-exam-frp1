@@ -2,7 +2,7 @@
     <div class="container">
         <div class="columns mt-6 mb-6">
             <div class="column">
-                <h1 class="title is-2">All Nerd Articles</h1>
+                <h1 class="title is-2">All News Articles</h1>
             </div>
             <div class="column">
                 <a href="{{ route('articles.create') }}" class="button is-primary is-pulled-right">

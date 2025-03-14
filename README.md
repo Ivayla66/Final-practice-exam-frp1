@@ -14,6 +14,7 @@ What's all the bells and whistles this project can perform?
 ## Authors
 
 * **Daan de Waard** - *Initial work* - [dwaard](https://github.com/dwaard)
+* **Daan de Waard** - *Initial work* - [Ivayla66](https://github.com/HZ-ICT1-2425/fpr1-exam-1-Ivayla66)
 
 See also the list of [contributors](https://github.com/HZ-HBO-ICT/laravel-skeleton-app/graphs/contributors) who
 participated in this project.
