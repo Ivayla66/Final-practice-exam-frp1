@@ -23,7 +23,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $result)
+                            @foreach($orders as $result)
                                 <tr>
                                     <td>{{ $result->code }}</td>
                                     <td>{{ $result->description }}</td>
