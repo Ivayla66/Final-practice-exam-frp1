@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductOrderController;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +18,4 @@ Route::get('/', function () {
 Route::resource('/articles', ArticleController::class);
 Route::resource('/products', ProductController::class);
 Route::resource('/orders', ProductOrderController::class);
+Route::resource('/deliveries', DeliveryController::class);

@@ -7,7 +7,7 @@
         <div class="column is-8-desktop is-12-tablet">
             <article class="content">
                 <p>
-                    WELCOME to <strong>DutchGroceries</strong>, the perfect solution for Dutch immigrants in Sweden who
+                    Welcome to <strong>DutchGroceries</strong>, the perfect solution for Dutch immigrants in Sweden who
                     miss the <em>authentic flavors</em> of their homeland! Our platform makes it easier than ever to
                     enjoy beloved Dutch specialties such as <strong>kroketten</strong>, <strong>kaassoufflés</strong>,
                     and creamy <em>peanut sauce</em>. Whether you’re hosting a Dutch-themed party or simply craving the
