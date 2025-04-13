@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
-    // Add this inside the class (between the curly braces)
+
     protected $fillable = [
         'name',
         'description',
