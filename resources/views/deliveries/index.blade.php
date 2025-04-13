@@ -38,8 +38,6 @@
                                         <div class="buttons">
                                             <a href="{{ route('deliveries.edit', $delivery->id) }}"
                                                class="button is-small is-light">Edit</a>
-                                            <a href="{{ route('deliveries.show', $delivery->id) }}"
-                                               class="button is-small is-info">View</a>
                                         </div>
                                     </td>
                                 </tr>
