@@ -84,9 +84,12 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified delivery
      */
-    public function edit(Delivery $delivery): object
+    public function edit(Delivery $delivery)
     {
-        return view('deliveries.edit', compact('delivery'));
+        return view('deliveries.edit', [
+            'delivery' => $delivery, // Make sure this variable name matches your view
+            'statusOptions' => ['planned', 'active', 'processing', 'delivered']
+        ]);
     }
 
     /**
