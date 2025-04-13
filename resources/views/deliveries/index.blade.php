@@ -6,10 +6,7 @@
             </div>
             <div class="column">
                 <a href="{{ route('deliveries.create') }}" class="button is-primary is-pulled-right">
-                    <span class="icon">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                    <span>Create New Order</span>
+                    Create New Order
                 </a>
             </div>
         </div>
@@ -23,11 +20,11 @@
                         <table class="table is-fullwidth">
                             <thead>
                             <tr>
-                                <th style="width: 20%">Code</th>
-                                <th style="width: 40%">Description</th>
-                                <th style="width: 10%">Price (SEK)</th>
-                                <th style="width: 10%">Status</th>
-                                <th style="width: 20%">Actions</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Price (SEK)</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,32 +33,15 @@
                                     <td>{{ $delivery->code }}</td>
                                     <td>{{ $delivery->description }}</td>
                                     <td>{{ number_format($delivery->price_at_purchase, 2) }}</td>
+                                    <td>{{ ucfirst($delivery->status) }}</td>
                                     <td>
-                                        <span class="tag @if($delivery->status === 'delivered') is-dark @else is-info @endif">
-                                            {{ ucfirst($delivery->status) }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="field has-addons">
-                                            <p class="control">
-                                                <a href="{{ route('deliveries.edit', $delivery->id) }}"
-                                                   class="button is-small is-light">
-                                                    <span class="icon">
-                                                        <i class="fas fa-edit"></i>
-                                                    </span>
-                                                    <span>Edit</span>
-                                                </a>
-                                            </p>
-                                            @if($delivery->can_accept_orders)
-                                                <p class="control">
-                                                    <button class="button is-small is-primary">
-                                                    <span class="icon">
-                                                        <i class="fas fa-check"></i>
-                                                    </span>
-                                                        <span>Mark Paid</span>
-                                                    </button>
-                                                </p>
-                                            @endif
+                                        <div class="buttons">
+                                            <a href="{{ route('deliveries.edit', $delivery->id) }}" class="button is-small is-light">Edit</a>
+                                            <form action="{{ route('deliveries.destroy', $delivery->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="button is-small is-danger">Delete</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
