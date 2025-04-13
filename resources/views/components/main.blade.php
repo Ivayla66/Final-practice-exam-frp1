@@ -37,6 +37,10 @@
                            class="navbar-item {{ request()->route()->getName() === 'products.index' ? "is-active" : "" }}">
                             Products
                         </a>
+                        <a href="{{ route('deliveries.index') }}"
+                           class="navbar-item {{ request()->routeIs('deliveries.*') ? 'is-active' : '' }}">
+                            Deliveries
+                        </a>
                         <a href="{{ route('orders.index') }}"
                            class="navbar-item {{ request()->route()->getName() === 'orders.index' ? "is-active" : "" }}">
                             Orders
