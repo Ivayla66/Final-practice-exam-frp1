@@ -36,12 +36,10 @@
                                     <td>{{ ucfirst($delivery->status) }}</td>
                                     <td>
                                         <div class="buttons">
-                                            <a href="{{ route('deliveries.edit', $delivery->id) }}" class="button is-small is-light">Edit</a>
-                                            <form action="{{ route('deliveries.destroy', $delivery->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="button is-small is-danger">Delete</button>
-                                            </form>
+                                            <a href="{{ route('deliveries.edit', $delivery->id) }}"
+                                               class="button is-small is-light">Edit</a>
+                                            <a href="{{ route('deliveries.show', $delivery->id) }}"
+                                               class="button is-small is-info">View</a>
                                         </div>
                                     </td>
                                 </tr>

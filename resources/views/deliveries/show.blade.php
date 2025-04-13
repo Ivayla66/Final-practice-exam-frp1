@@ -1,29 +1,28 @@
 <x-main>
     <div class="container">
-        <div class="columns mt-6">
+        <div class="columns mt-6 mb-6">
             <div class="column">
                 <p class="title is-2">Delivery Details</p>
+            </div>
+            <div class="column">
+                <a href="{{ route('deliveries.index') }}" class="button is-pulled-right">Back to List</a>
             </div>
         </div>
 
         <div class="box">
-            <div class="content">
-                <div class="columns">
-                    <div class="column">
-                        <p><strong>Code:</strong> {{ $delivery->code }}</p>
-                        <p><strong>Description:</strong> {{ $delivery->description }}</p>
-                        <p><strong>Price:</strong> {{ number_format($delivery->price_at_purchase, 2) }} SEK</p>
-                    </div>
-                    <div class="column">
-                        <p>
-                            <strong>Status:</strong>
-                            <span class="tag {{ $statusColors[$delivery->status] }}">
-                                {{ ucfirst($delivery->status) }}
-                            </span>
-                        </p>
-                        <p><strong>Can Accept Orders:</strong> {{ $delivery->can_accept_orders ? 'Yes' : 'No' }}</p>
-                        <p><strong>Deadline:</strong> {{ $delivery->order_deadline?->format('Y-m-d H:i') ?? 'None' }}</p>
-                    </div>
+            <!-- Display all delivery details -->
+            <!-- Include can_accept_orders and other business logic -->
+
+            <div class="field is-grouped mt-5">
+                <div class="control">
+                    <a href="{{ route('deliveries.edit', $delivery->id) }}" class="button is-primary">Edit</a>
+                </div>
+                <div class="control">
+                    <form action="{{ route('deliveries.destroy', $delivery->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="button is-danger">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>

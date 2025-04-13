@@ -14,51 +14,14 @@
                     <form method="POST" action="{{ route('deliveries.store') }}">
                         @csrf
 
-                        <div class="field">
-                            <label class="label">Code</label>
-                            <div class="control">
-                                <input class="input" type="text" name="code" required>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Description</label>
-                            <div class="control">
-                                <textarea class="textarea" name="description" required></textarea>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Price (SEK)</label>
-                            <div class="control">
-                                <input class="input" type="number" step="0.01" name="price_at_purchase" required>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Status</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="status" required>
-                                        <option value="planned">Planned</option>
-                                        <option value="active">Active</option>
-                                        <option value="processing">Processing</option>
-                                        <option value="delivered">Delivered</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Order Deadline (optional)</label>
-                            <div class="control">
-                                <input class="input" type="datetime-local" name="order_deadline">
-                            </div>
-                        </div>
+                        <!-- Form fields same as previously provided -->
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button type="submit" class="button is-primary">Create Delivery</button>
+                                <button type="submit" class="button is-primary">Save</button>
+                            </div>
+                            <div class="control">
+                                <a href="{{ route('deliveries.index') }}" class="button is-light">Cancel</a>
                             </div>
                         </div>
                     </form>

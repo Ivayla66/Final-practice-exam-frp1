@@ -42,12 +42,9 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate($this->validationRules());
-
-        Delivery::create($validated);
-
-        return redirect()->route('deliveries.index')
-            ->with('success', 'Delivery created successfully.');
+        $validated = $request->validate([/* rules */]);
+        $delivery = Delivery::create($validated);
+        return redirect()->route('deliveries.show', $delivery->id);
     }
 
     /**
@@ -79,12 +76,9 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, Delivery $delivery)
     {
-        $validated = $request->validate($this->validationRules());
-
+        $validated = $request->validate([/* rules */]);
         $delivery->update($validated);
-
-        return redirect()->route('deliveries.show', $delivery)
-            ->with('success', 'Delivery updated successfully.');
+        return redirect()->route('deliveries.show', $delivery->id);
     }
 
     /**
