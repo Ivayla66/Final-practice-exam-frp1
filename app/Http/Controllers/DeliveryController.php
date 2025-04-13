@@ -45,9 +45,24 @@ class DeliveryController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $validated = $request->validate([/* rules */]);
-        $delivery = Delivery::create($validated);
-        return redirect()->route('deliveries.show', $delivery->id);
+        $validated = $request->validate([
+            'code' => 'required|string|max:50|unique:deliveries',
+            'description' => 'required|string',
+            'price_at_purchase' => 'required|numeric|min:0',
+            'status' => 'required|in:planned,active,processing,delivered',
+            'order_deadline' => 'nullable|date',
+        ]);
+
+        try {
+            $delivery = Delivery::create($validated);
+            return redirect()
+                ->route('deliveries.show', $delivery->id)
+                ->with('success', 'Delivery created successfully!');
+        } catch (\Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors(['error' => 'Failed to create delivery. Please try again.']);
+        }
     }
 
     /**
@@ -69,7 +84,7 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified delivery
      */
-    public function edit(Delivery $delivery)
+    public function edit(Delivery $delivery): object
     {
         return view('deliveries.edit', compact('delivery'));
     }

@@ -14,7 +14,21 @@
                     <form method="POST" action="{{ route('deliveries.store') }}">
                         @csrf
 
-                        <!-- Form fields same as previously provided -->
+                        <!-- Code Field Example -->
+                        <div class="field">
+                            <label class="label">Code</label>
+                            <div class="control">
+                                <input class="input @error('code') is-danger @enderror"
+                                       type="text"
+                                       name="code"
+                                       value="{{ old('code') }}">
+                                @error('code')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Repeat for other fields (description, price, etc.) -->
 
                         <div class="field is-grouped">
                             <div class="control">
