@@ -26,10 +26,11 @@ class DeliveryController extends Controller
     /**
      * Display a listing of deliveries
      */
+    // app/Http/Controllers/DeliveryController.php
     public function index(): object
     {
-        $deliveries = \App\Models\Delivery::all(); // Explicit namespace
-        return view('deliveries.index', ['deliveries' => $deliveries]); // Explicit variable passing
+        $deliveries = Delivery::latest()->paginate(10); // Shows 10 per page
+        return view('deliveries.index', compact('deliveries'));
     }
 
     /**
