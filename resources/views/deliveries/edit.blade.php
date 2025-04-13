@@ -11,31 +11,33 @@
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-half">
-                    <form method="POST" action="{{ route('deliveries.update', $delivery->id) }}">
-                        @csrf
-                        @method('PUT')
+                    @csrf
+                    @method('PUT')
 
-                        <!-- Form fields pre-populated with $delivery data -->
+                    <!-- Your form fields here -->
 
-                        <div class="field is-grouped">
-                            <div class="control">
-                                <button type="submit" class="button is-primary">Save</button>
-                            </div>
-                            <div class="control">
-                                <a href="{{ route('deliveries.index') }}" class="button is-light">Cancel</a>
-                            </div>
-                            <div class="control">
-                                <button type="button"
-                                        onclick="confirmDelete()"
-                                        class="button is-danger">Delete</button>
-                            </div>
+                    <div class="field is-grouped">
+                        <!-- Save Button (goes to show page on success) -->
+                        <div class="control">
+                            <button type="submit" class="button is-primary">Save</button>
                         </div>
-                    </form>
 
-                    <form id="deleteForm" method="POST" action="{{ route('deliveries.destroy', $delivery->id) }}">
-                        @csrf
-                        @method('DELETE')
-                    </form>
+                        <!-- Cancel Button (goes to show page) -->
+                        <div class="control">
+                            <a href="{{ route('deliveries.show', $delivery->id) }}"
+                               class="button is-light">Cancel</a>
+                        </div>
+
+                        <!-- Delete Button (goes to index page) -->
+                        <div class="control">
+                            <form method="POST" action="{{ route('deliveries.destroy', $delivery->id) }}"
+                                  style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="button is-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
 
                     <script>
                         function confirmDelete() {

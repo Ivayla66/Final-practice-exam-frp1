@@ -74,21 +74,30 @@ class DeliveryController extends Controller
     /**
      * Update the specified delivery (Fully compliant with 4.3 Edit [17pt])
      */
-    public function update(Request $request, Delivery $delivery)
+    // DeliveryController.php
+    public function update(Request $request, Delivery $delivery): \Illuminate\Http\RedirectResponse
     {
-        $validated = $request->validate([/* rules */]);
-        $delivery->update($validated);
-        return redirect()->route('deliveries.show', $delivery->id);
+        $validated = $request->validate([
+            // Your validation rules
+        ]);
+
+        try {
+            $delivery->update($validated);
+            return redirect()->route('deliveries.show', $delivery->id)
+                ->with('success', 'Delivery updated!');
+        } catch (\Exception $e) {
+            // Stay on edit page if error occurs
+            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
      * Remove the specified delivery (Fully compliant with 4.4 Delete [8pt])
      */
-    public function destroy(Delivery $delivery)
+    public function destroy(Delivery $delivery): \Illuminate\Http\RedirectResponse
     {
         $delivery->delete();
-
         return redirect()->route('deliveries.index')
-            ->with('success', 'Delivery deleted successfully.');
+            ->with('success', 'Delivery deleted!');
     }
 }
