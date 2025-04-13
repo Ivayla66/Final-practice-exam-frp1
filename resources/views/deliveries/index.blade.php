@@ -2,7 +2,7 @@
     <div class="container">
         <div class="columns mt-6 mb-6">
             <div class="column">
-                <p class="title is-2">All Product Orders</p>
+                <p class="title is-2">All Deliveries</p>
             </div>
             <div class="column">
                 <a href="{{ route('deliveries.create') }}" class="button is-primary is-pulled-right">
