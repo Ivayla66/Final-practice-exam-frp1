@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class DeliveryController extends Controller
 {
     // Common validation rules
-    protected function validationRules()
+    /**
+     * @return string[]
+     */
+    protected function validationRules(): array
     {
         return [
             'code' => 'required|string|max:50',
@@ -23,7 +26,7 @@ class DeliveryController extends Controller
     /**
      * Display a listing of deliveries
      */
-    public function index()
+    public function index(): object
     {
         $deliveries = \App\Models\Delivery::all(); // Explicit namespace
         return view('deliveries.index', ['deliveries' => $deliveries]); // Explicit variable passing
@@ -32,7 +35,7 @@ class DeliveryController extends Controller
     /**
      * Show the form for creating a new delivery
      */
-    public function create()
+    public function create(): object
     {
         return view('deliveries.create');
     }
@@ -40,7 +43,7 @@ class DeliveryController extends Controller
     /**
      * Store a newly created delivery
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([/* rules */]);
         $delivery = Delivery::create($validated);
@@ -50,7 +53,7 @@ class DeliveryController extends Controller
     /**
      * Display the specified delivery (Fully compliant with 4.1 Show [7pt])
      */
-    public function show(Delivery $delivery)
+    public function show(Delivery $delivery): object
     {
         return view('deliveries.show', [
             'delivery' => $delivery,
