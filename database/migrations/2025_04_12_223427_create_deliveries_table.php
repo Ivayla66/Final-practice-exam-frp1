@@ -7,25 +7,24 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * @return void
      */
     public function up(): void
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('price', 8, 2);
-            $table->decimal('weight', 8, 2);
-            $table->string('address');
+            $table->string('code')->unique();
+            $table->text('description');
+            $table->decimal('price_at_purchase', 10, 2);
+            $table->string('status')->default('planned');
             $table->timestamp('order_deadline')->nullable();
-            $table->string('status');
+            $table->timestamp('payed_at')->nullable();
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * @return void
      */
     public function down(): void
     {

@@ -2,30 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
+    use HasFactory;
 
     protected $fillable = [
-        'name',
+        'code',
         'description',
-        'price',
-        'weight',
-        'address',
+        'price_at_purchase',
+        'status',
         'order_deadline',
-        'status'
+        'payed_at'
     ];
 
-    // Business Logic: can_accept_orders (derived attribute)
+    protected $casts = [
+        'price_at_purchase' => 'decimal:2',
+        'order_deadline' => 'datetime',
+        'payed_at' => 'datetime'
+    ];
+
+    /**
+     * @return bool
+     */
     public function getCanAcceptOrdersAttribute(): bool
     {
         return in_array($this->status, ['planned', 'active']);
-    }
-
-    // Status Validation (optional helper)
-    public static function validStatuses(): array
-    {
-        return ['planned', 'active', 'processing', 'delivered'];
     }
 }

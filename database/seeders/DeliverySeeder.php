@@ -7,8 +7,25 @@ use Illuminate\Database\Seeder;
 
 class DeliverySeeder extends Seeder
 {
-    public function run()
+    /**
+     * @return void
+     */
+    public function run(): void
     {
-        Delivery::factory()->count(10)->create();
+        // Create 10 random deliveries
+        Delivery::factory()
+            ->count(8)
+            ->create();
+
+        // Create 2 specific status deliveries
+        Delivery::factory()
+            ->count(1)
+            ->planned()
+            ->create();
+
+        Delivery::factory()
+            ->count(1)
+            ->active()
+            ->create();
     }
 }
