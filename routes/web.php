@@ -19,3 +19,4 @@ Route::resource('/articles', ArticleController::class);
 Route::resource('/products', ProductController::class);
 Route::resource('/orders', ProductOrderController::class);
 Route::resource('/deliveries', DeliveryController::class);
+Route::get('/deliveries', [DeliveryController::class, 'index'])->name('deliveries.index');
