@@ -25,8 +25,8 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $deliveries = Delivery::all();
-        return view('deliveries.index', compact('deliveries'));
+        $deliveries = \App\Models\Delivery::all(); // Explicit namespace
+        return view('deliveries.index', ['deliveries' => $deliveries]); // Explicit variable passing
     }
 
     /**

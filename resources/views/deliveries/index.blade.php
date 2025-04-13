@@ -28,7 +28,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($deliveries as $delivery)
+                            @foreach($deliveries ?? [] as $delivery)
                                 <tr @if($delivery->status === 'delivered') style="background-color: #e0e0e0;" @endif>
                                     <td>{{ $delivery->code }}</td>
                                     <td>{{ $delivery->description }}</td>
