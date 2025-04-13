@@ -7,17 +7,7 @@
             </div>
         @endif
 
-        <div class="columns is-vcentered">
-            <div class="column">
-                <h1 class="title is-2">Delivery #{{ $delivery->id }}</h1>
-            </div>
-            <div class="column has-text-right">
-                <a href="{{ route('deliveries.edit', $delivery->id) }}"
-                   class="button is-primary is-light">
-                    Edit
-                </a>
-            </div>
-        </div>
+        <h1 class="title is-2">Delivery #{{ $delivery->id }}</h1>
 
         <div class="box">
             <div class="columns">
@@ -32,15 +22,18 @@
                             {{ ucfirst($delivery->status) }}
                         </span>
                     </p>
+                    <p><strong>Can Accept Orders:</strong>
+                        @if($delivery->can_accept_orders)
+                            <span class="tag is-success">Yes</span>
+                        @else
+                            <span class="tag is-danger">No</span>
+                        @endif
+                    </p>
                     <p><strong>Order Deadline:</strong>
-                        {{ $delivery->order_deadline ? $delivery->order_deadline->format('Y-m-d H:i') : 'None' }}
+                        {{ $delivery->order_deadline ? $delivery->order_deadline->format('Y-m-d H:i') : 'Not specified' }}
                     </p>
                 </div>
             </div>
         </div>
-
-        <a href="{{ route('deliveries.index') }}" class="button is-light">
-            ← Back to All Deliveries
-        </a>
     </div>
 </x-main>
