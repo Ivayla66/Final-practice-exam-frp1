@@ -34,15 +34,16 @@ class DeliveryController extends Controller
     {
         $validated = $request->validate([
             'code' => 'required|string|max:50|unique:deliveries',
-            'description' => 'required|string',
+            'description' => 'required|string|max:255',
             'price_at_purchase' => 'required|numeric|min:0',
             'status' => 'required|in:planned,active,processing,delivered',
-            'order_deadline' => 'nullable|date',
         ]);
 
         $delivery = Delivery::create($validated);
 
-        return redirect()->route('deliveries.show', $delivery);
+        return redirect()
+            ->route('deliveries.show', $delivery)
+            ->with('success', 'Delivery created successfully!');
     }
 
     /**
