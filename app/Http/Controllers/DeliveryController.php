@@ -7,44 +7,30 @@ use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
-    // Common validation rules
     /**
-     * @return string[]
+     * Display a listing of Deliveries.
      */
-    protected function validationRules(): array
+    public function index()
     {
-        return [
-            'code' => 'required|string|max:50',
-            'description' => 'required|string|max:255',
-            'price_at_purchase' => 'required|numeric|min:0',
-            'status' => 'required|in:planned,active,processing,delivered',
-            'order_deadline' => 'nullable|date',
-            'payed_at' => 'nullable|date'
-        ];
+        return view('deliveries.index', [
+            'deliveries' => Delivery::all()
+        ]);
     }
 
     /**
-     * Display a listing of deliveries
+     * Show the form for creating a new Delivery.
      */
-    // app/Http/Controllers/DeliveryController.php
-    public function index(): object
+    public function create()
     {
-        $deliveries = Delivery::latest()->paginate(10); // Shows 10 per page
-        return view('deliveries.index', compact('deliveries'));
+        return view('deliveries.create', [
+            'statusOptions' => ['planned', 'active', 'processing', 'delivered']
+        ]);
     }
 
     /**
-     * Show the form for creating a new delivery
+     * Store a newly created Delivery in storage.
      */
-    public function create(): object
-    {
-        return view('deliveries.create');
-    }
-
-    /**
-     * Store a newly created delivery
-     */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'code' => 'required|string|max:50|unique:deliveries',
@@ -54,72 +40,56 @@ class DeliveryController extends Controller
             'order_deadline' => 'nullable|date',
         ]);
 
-        try {
-            $delivery = Delivery::create($validated);
-            return redirect()
-                ->route('deliveries.show', $delivery->id)
-                ->with('success', 'Delivery created successfully!');
-        } catch (\Exception $e) {
-            return back()
-                ->withInput()
-                ->withErrors(['error' => 'Failed to create delivery. Please try again.']);
-        }
+        $delivery = Delivery::create($validated);
+
+        return redirect()->route('deliveries.show', $delivery);
     }
 
     /**
-     * Display the specified delivery (Fully compliant with 4.1 Show [7pt])
+     * Display the specified Delivery.
      */
-    public function show(Delivery $delivery): object
+    public function show(Delivery $delivery)
     {
         return view('deliveries.show', [
-            'delivery' => $delivery,
-            'statusColors' => [
-                'planned' => 'is-info',
-                'active' => 'is-primary',
-                'processing' => 'is-warning',
-                'delivered' => 'is-dark'
-            ]
+            'delivery' => $delivery
         ]);
     }
 
     /**
-     * Show the form for editing the specified delivery
+     * Show the form for editing the specified Delivery.
      */
     public function edit(Delivery $delivery)
     {
         return view('deliveries.edit', [
-            'delivery' => $delivery, // Make sure this variable name matches your view
+            'delivery' => $delivery,
             'statusOptions' => ['planned', 'active', 'processing', 'delivered']
         ]);
     }
 
     /**
-     * Update the specified delivery (Fully compliant with 4.3 Edit [17pt])
+     * Update the specified Delivery in storage.
      */
-    // DeliveryController.php
-    public function update(Request $request, Delivery $delivery): \Illuminate\Http\RedirectResponse
+    public function update(Request $request, Delivery $delivery)
     {
         $validated = $request->validate([
-            // Your validation rules
+            'code' => 'required|string|max:50|unique:deliveries,code,'.$delivery->id,
+            'description' => 'required|string',
+            'price_at_purchase' => 'required|numeric|min:0',
+            'status' => 'required|in:planned,active,processing,delivered',
+            'order_deadline' => 'nullable|date',
         ]);
 
-        try {
-            $delivery->update($validated);
-            return redirect()->route('deliveries.show', $delivery->id)
-                ->with('success', 'Delivery updated!');
-        } catch (\Exception $e) {
-            // Stay on edit page if error occurs
-            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
-        }
+        $delivery->update($validated);
+
+        return redirect()->route('deliveries.show', $delivery);
     }
 
     /**
-     * Remove the specified delivery (Fully compliant with 4.4 Delete [8pt])
+     * Remove the specified Delivery from storage.
      */
-    public function destroy(Delivery $delivery): \Illuminate\Http\RedirectResponse
+    public function destroy(Delivery $delivery)
     {
         $delivery->delete();
-        return redirect()->route('deliveries.index')
-            ->with('success', 'Delivery deleted!');
+        return redirect()->route('deliveries.index');
     }
 }

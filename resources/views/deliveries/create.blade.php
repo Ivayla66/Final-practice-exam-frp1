@@ -24,7 +24,7 @@
 
             <div class="field is-grouped mt-5">
                 <div class="control">
-                    <button type="submit" class="button is-primary">Save Delivery</button>
+                    <a href="{{ route('deliveries.index') }}" class="button is-primary">Save Delivery</a>
                 </div>
                 <div class="control">
                     <a href="{{ route('deliveries.index') }}" class="button is-light">Cancel</a>
