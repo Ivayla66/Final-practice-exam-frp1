@@ -6,7 +6,7 @@
             </div>
             <div class="column">
                 <a href="{{ route('deliveries.create') }}" class="button is-primary is-pulled-right">
-                    Create New Order
+                    Create
                 </a>
             </div>
         </div>
