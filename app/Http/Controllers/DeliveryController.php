@@ -81,7 +81,9 @@ class DeliveryController extends Controller
 
         $delivery->update($validated);
 
-        return redirect()->route('deliveries.show', $delivery);
+        return redirect()
+            ->route('deliveries.show', $delivery)
+            ->with('success', 'Delivery updated successfully!'); // Add this line
     }
 
     /**
