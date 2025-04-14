@@ -70,6 +70,7 @@ class DeliveryController extends Controller
     /**
      * Update the specified Delivery in storage.
      */
+    // Update method (for Save Changes button)
     public function update(Request $request, Delivery $delivery)
     {
         $validated = $request->validate([
@@ -81,17 +82,20 @@ class DeliveryController extends Controller
 
         $delivery->update($validated);
 
+        // Redirect to show page with success message
         return redirect()
-            ->route('deliveries.show', $delivery)
-            ->with('success', 'Delivery updated successfully!'); // Add this line
+            ->route('deliveries.show', $delivery)  // Show page with same ID
+            ->with('success', 'Delivery updated successfully!');
     }
 
-    /**
-     * Remove the specified Delivery from storage.
-     */
+// Destroy method (for Delete button)
     public function destroy(Delivery $delivery)
     {
         $delivery->delete();
-        return redirect()->route('deliveries.index');
+
+        // Redirect to index page after deletion
+        return redirect()
+            ->route('deliveries.index')
+            ->with('success', 'Delivery deleted successfully!');
     }
 }
