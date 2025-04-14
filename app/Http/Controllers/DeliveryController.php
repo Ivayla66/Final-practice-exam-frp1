@@ -77,7 +77,6 @@ class DeliveryController extends Controller
             'description' => 'required|string',
             'price_at_purchase' => 'required|numeric|min:0',
             'status' => 'required|in:planned,active,processing,delivered',
-            'order_deadline' => 'nullable|date',
         ]);
 
         $delivery->update($validated);
