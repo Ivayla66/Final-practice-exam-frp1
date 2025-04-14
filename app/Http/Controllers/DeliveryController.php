@@ -73,6 +73,7 @@ class DeliveryController extends Controller
     // Update method (for Save Changes button)
     public function update(Request $request, Delivery $delivery)
     {
+        // Step 1: Validate (if fails, Laravel auto-redirects back to edit page with errors)
         $validated = $request->validate([
             'code' => 'required|string|max:50|unique:deliveries,code,'.$delivery->id,
             'description' => 'required|string',
@@ -80,22 +81,19 @@ class DeliveryController extends Controller
             'status' => 'required|in:planned,active,processing,delivered',
         ]);
 
+        // Step 2: Only runs if validation passes
         $delivery->update($validated);
 
-        // Redirect to show page with success message
+        // Step 3: Redirect to show page on success
         return redirect()
-            ->route('deliveries.show', $delivery)  // Show page with same ID
-            ->with('success', 'Delivery updated successfully!');
+            ->route('deliveries.show', $delivery)
+            ->with('success', 'Delivery updated!');
     }
 
 // Destroy method (for Delete button)
     public function destroy(Delivery $delivery)
     {
         $delivery->delete();
-
-        // Redirect to index page after deletion
-        return redirect()
-            ->route('deliveries.index')
-            ->with('success', 'Delivery deleted successfully!');
+        return redirect()->route('deliveries.index')->with('success', 'Delivery deleted!');
     }
 }
