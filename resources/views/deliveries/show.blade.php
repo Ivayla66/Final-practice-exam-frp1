@@ -14,9 +14,6 @@
                 <p><strong>Description:</strong> {{ $delivery->description }}</p>
                 <p><strong>Price:</strong> {{ number_format($delivery->price_at_purchase, 2) }} SEK</p>
                 <p><strong>Status:</strong> {{ ucfirst($delivery->status) }}</p>
-                @if($delivery->order_deadline)
-                    <p><strong>Order Deadline:</strong> {{ $delivery->order_deadline->format('Y-m-d H:i') }}</p>
-                @endif
             </div>
         </div>
 
