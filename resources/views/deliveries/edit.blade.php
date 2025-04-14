@@ -88,29 +88,21 @@
                     <a href="{{ route('deliveries.show', $delivery->id) }}"
                        class="button is-light">Cancel</a>
                 </div>
-                <div class="control">
-                    <form method="POST"
-                          action="{{ route('deliveries.destroy', $delivery->id) }}"
-                          style="display: inline;"
-                          id="deleteForm">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button"
-                                onclick="confirmDelete()"
-                                class="button is-danger">
-                            Delete
-                        </button>
-                    </form>
-                </div>
             </div>
         </form>
 
-        <script>
-            function confirmDelete() {
-                if (confirm('Are you sure you want to delete this delivery?')) {
-                    document.getElementById('deleteForm').submit();
-                }
-            }
-        </script>
+        <!-- Separate delete form -->
+        <form method="POST"
+              action="{{ route('deliveries.destroy', $delivery->id) }}"
+              class="mt-4"
+              id="deleteForm">
+            @csrf
+            @method('DELETE')
+            <button type="button"
+                    onclick="if(confirm('Are you sure?')){this.form.submit()}"
+                    class="button is-danger">
+                Delete Delivery
+            </button>
+        </form>
     </div>
 </x-main>
