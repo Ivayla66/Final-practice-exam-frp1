@@ -36,7 +36,7 @@ class DeliveryController extends Controller
             'code' => 'required|string|max:50|unique:deliveries',
             'description' => 'required|string|max:255',
             'price_at_purchase' => 'required|numeric|min:0',
-            'status' => 'required|in:planned,active,processing,delivered',
+            'status' => 'required|in:planned,active,processing,delivered'
         ]);
 
         $delivery = Delivery::create($validated);

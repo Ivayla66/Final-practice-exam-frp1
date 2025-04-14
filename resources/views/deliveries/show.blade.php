@@ -13,7 +13,11 @@
                 <p><strong>Code:</strong> {{ $delivery->code }}</p>
                 <p><strong>Description:</strong> {{ $delivery->description }}</p>
                 <p><strong>Price:</strong> {{ number_format($delivery->price_at_purchase, 2) }} SEK</p>
-                <p><strong>Status:</strong> {{ ucfirst($delivery->status) }}</p>
+                <p><strong>Status:</strong>
+                    <span class="tag @if($delivery->status === 'delivered') is-dark @else is-info @endif">
+                        {{ ucfirst($delivery->status) }}
+                    </span>
+                </p>
             </div>
         </div>
 

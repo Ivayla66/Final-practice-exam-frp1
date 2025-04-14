@@ -15,9 +15,9 @@
         <form method="POST" action="{{ route('deliveries.store') }}">
             @csrf
 
-            <!-- Code Field -->
+            <!-- Code -->
             <div class="field">
-                <label class="label">Code</label>
+                <label class="label">Code*</label>
                 <div class="control">
                     <input class="input @error('code') is-danger @enderror"
                            type="text"
@@ -25,27 +25,23 @@
                            value="{{ old('code') }}"
                            required>
                 </div>
-                @error('code')
-                <p class="help is-danger">{{ $message }}</p>
-                @enderror
+                @error('code')<p class="help is-danger">{{ $message }}</p>@enderror
             </div>
 
-            <!-- Description Field -->
+            <!-- Description -->
             <div class="field">
-                <label class="label">Description</label>
+                <label class="label">Description*</label>
                 <div class="control">
                     <textarea class="textarea @error('description') is-danger @enderror"
                               name="description"
                               required>{{ old('description') }}</textarea>
                 </div>
-                @error('description')
-                <p class="help is-danger">{{ $message }}</p>
-                @enderror
+                @error('description')<p class="help is-danger">{{ $message }}</p>@enderror
             </div>
 
-            <!-- Price Field -->
+            <!-- Price -->
             <div class="field">
-                <label class="label">Price (SEK)</label>
+                <label class="label">Price (SEK)*</label>
                 <div class="control">
                     <input class="input @error('price_at_purchase') is-danger @enderror"
                            type="number"
@@ -54,39 +50,24 @@
                            value="{{ old('price_at_purchase') }}"
                            required>
                 </div>
-                @error('price_at_purchase')
-                <p class="help is-danger">{{ $message }}</p>
-                @enderror
+                @error('price_at_purchase')<p class="help is-danger">{{ $message }}</p>@enderror
             </div>
 
-            <!-- Status Field -->
+            <!-- Status -->
             <div class="field">
-                <label class="label">Status</label>
+                <label class="label">Status*</label>
                 <div class="control">
                     <div class="select is-fullwidth @error('status') is-danger @enderror">
                         <select name="status" required>
                             <option value="" disabled selected>Select Status</option>
-                            <option value="planned" @if(old('status') == 'planned') selected @endif>Planned</option>
-                            <option value="active" @if(old('status') == 'active') selected @endif>Active</option>
-                            <option value="processing" @if(old('status') == 'processing') selected @endif>Processing</option>
-                            <option value="delivered" @if(old('status') == 'delivered') selected @endif>Delivered</option>
+                            <option value="planned" @selected(old('status') == 'planned')>Planned</option>
+                            <option value="active" @selected(old('status') == 'active')>Active</option>
+                            <option value="processing" @selected(old('status') == 'processing')>Processing</option>
+                            <option value="delivered" @selected(old('status') == 'delivered')>Delivered</option>
                         </select>
                     </div>
                 </div>
-                @error('status')
-                <p class="help is-danger">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Order Deadline (Optional) -->
-            <div class="field">
-                <label class="label">Order Deadline (Optional)</label>
-                <div class="control">
-                    <input class="input"
-                           type="datetime-local"
-                           name="order_deadline"
-                           value="{{ old('order_deadline') }}">
-                </div>
+                @error('status')<p class="help is-danger">{{ $message }}</p>@enderror
             </div>
 
             <div class="field is-grouped mt-5">
