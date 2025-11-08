@@ -11,6 +11,9 @@
         </h2>
 
         {{-- Here are all the form fields --}}
+
+        <form method="POST" action="{{ route('articles.store') }}">
+            @csrf
         <div class="field">
             <label for="name" class="label">Name</label>
             <div class="control has-icons-right">

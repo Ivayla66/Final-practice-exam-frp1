@@ -14,7 +14,7 @@ class Article extends Model
      *
      * @var array
      */
-    protected $casts = [
+    protected $fillable = [
         'published_at' => 'datetime:Y-m-d',
     ];
 }
