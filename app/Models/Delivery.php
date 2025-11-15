@@ -10,25 +10,23 @@ class Delivery extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
-        'description',
-        'price_at_purchase',
+        'name',
         'status',
-        'order_deadline',
-        'payed_at'
+        'order_deadline'
     ];
 
     protected $casts = [
-        'price_at_purchase' => 'decimal:2',
-        'order_deadline' => 'datetime',
-        'payed_at' => 'datetime'
+        'order_deadline' => 'datetime'
     ];
 
     /**
      * @return bool
      */
+    // Derived attribute: can_accept_orders = true for planned|active
+    protected $appends = ['can_accept_orders'];
+
     public function getCanAcceptOrdersAttribute(): bool
     {
-        return in_array($this->status, ['planned', 'active']);
+        return in_array($this->status, ['planned','active'], true);
     }
 }

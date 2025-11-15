@@ -13,8 +13,6 @@ class DeliverySeeder extends Seeder
     public function run(): void
     {
         // Create 10 random deliveries
-        Delivery::factory()
-            ->count(10)
-            ->create();
+        \App\Models\Delivery::factory(10)->create();
     }
 }

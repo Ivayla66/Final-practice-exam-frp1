@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->text('description');
-            $table->decimal('price_at_purchase', 10, 2);
+            $table->string('name');
             $table->string('status')->default('planned');
             $table->timestamp('order_deadline')->nullable();
-            $table->timestamp('payed_at')->nullable();
             $table->timestamps();
         });
     }

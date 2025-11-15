@@ -1,52 +1,24 @@
 <x-main>
-    <div class="container">
-        <div class="columns mt-6 mb-6">
-            <div class="column">
-                <p class="title is-2">All Deliveries</p>
-            </div>
-            <div class="column">
-                <a href="{{ route('deliveries.create') }}" class="button is-primary is-pulled-right">
-                    Create
-                </a>
-            </div>
-        </div>
-    </div>
+    <div class="container mt-5">
+        <h1 class="title">All Deliveries</h1>
 
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-12">
-                    <div class="content">
-                        <table class="table is-fullwidth">
-                            <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Description</th>
-                                <th>Price (SEK)</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($deliveries ?? [] as $delivery)
-                                <tr @if($delivery->status === 'delivered') style="background-color: #e0e0e0;" @endif>
-                                    <td>{{ $delivery->code }}</td>
-                                    <td>{{ $delivery->description }}</td>
-                                    <td>{{ number_format($delivery->price_at_purchase, 2) }}</td>
-                                    <td>{{ ucfirst($delivery->status) }}</td>
-                                    <td>
-                                        <div class="buttons">
-                                            <a href="{{ route('deliveries.edit', $delivery->id) }}"
-                                               class="button is-small is-light">Edit</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+        @foreach($deliveries as $delivery)
+            <div class="box @if($delivery->status === 'delivered') has-background-grey-lighter @endif">
+                <p><strong>Name:</strong> {{ $delivery->name }}</p>
+                <p><strong>Status:</strong>
+                    <span class="tag
+                        @if($delivery->status === 'delivered') is-dark
+                        @elseif($delivery->status === 'active') is-info
+                        @else is-warning
+                        @endif">
+                        {{ ucfirst($delivery->status) }}
+                    </span>
+                </p>
+                <p><strong>Order Deadline:</strong> {{ $delivery->order_deadline?->format('Y-m-d H:i') ?? 'N/A' }}</p>
+                <p><strong>Can Accept Orders:</strong> {{ $delivery->can_accept_orders ? 'Yes' : 'No' }}</p>
+
+                <a href="{{ route('deliveries.show', $delivery) }}" class="button is-small is-link">View</a>
             </div>
-        </div>
-    </section>
+        @endforeach
+    </div>
 </x-main>
