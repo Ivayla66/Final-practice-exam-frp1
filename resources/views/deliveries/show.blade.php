@@ -1,28 +1,22 @@
 <x-main>
     <div class="container">
-        @if(session('success'))
-            <div class="notification is-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
         <h1 class="title is-2">Delivery #{{ $delivery->id }}</h1>
 
         <div class="box">
-            <div class="content">
-                <p><strong>Code:</strong> {{ $delivery->code }}</p>
-                <p><strong>Description:</strong> {{ $delivery->description }}</p>
-                <p><strong>Price:</strong> {{ number_format($delivery->price_at_purchase, 2) }} SEK</p>
-                <p><strong>Status:</strong>
-                    <span class="tag @if($delivery->status === 'delivered') is-dark @else is-info @endif">
-                        {{ ucfirst($delivery->status) }}
-                    </span>
-                </p>
-            </div>
+            <p><strong>Name:</strong> {{ $delivery->name }}</p>
+            <p><strong>Status:</strong> {{ ucfirst($delivery->status) }}</p>
+            <p><strong>Order deadline:</strong> {{ $delivery->order_deadline?->format('Y-m-d H:i') ?? 'N/A' }}</p>
+            <p><strong>Can accept orders:</strong> {{ $delivery->can_accept_orders ? 'Yes' : 'No' }}</p>
         </div>
 
-        <a href="{{ route('deliveries.index') }}" class="button is-light">
-            Back to All Deliveries
-        </a>
+        <h2 class="title is-4">Product Orders</h2>
+        @foreach($delivery->productOrders as $order)
+            <div class="box">
+                <p><strong>{{ $order->code }}</strong></p>
+                <p>{{ $order->description }}</p>
+            </div>
+        @endforeach
+
+        <a href="{{ route('deliveries.index') }}" class="button is-light">Back</a>
     </div>
 </x-main>

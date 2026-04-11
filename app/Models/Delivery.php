@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Delivery extends Model
 {
@@ -12,21 +13,22 @@ class Delivery extends Model
     protected $fillable = [
         'name',
         'status',
-        'order_deadline'
+        'order_deadline',
     ];
 
     protected $casts = [
-        'order_deadline' => 'datetime'
+        'order_deadline' => 'datetime',
     ];
 
-    /**
-     * @return bool
-     */
-    // Derived attribute: can_accept_orders = true for planned|active
     protected $appends = ['can_accept_orders'];
 
     public function getCanAcceptOrdersAttribute(): bool
     {
-        return in_array($this->status, ['planned','active'], true);
+        return in_array($this->status, ['planned', 'active'], true);
+    }
+
+    public function productOrders(): HasMany
+    {
+        return $this->hasMany(ProductOrder::class);
     }
 }
